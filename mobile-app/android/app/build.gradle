@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
-apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
 applyNativeModulesAppBuildGradle(project)
 
 def enableProguardInReleaseBuilds = false
