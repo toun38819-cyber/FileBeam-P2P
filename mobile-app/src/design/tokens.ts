@@ -1,0 +1,1 @@
+export const colors = { primary: '#6C63FF', secondary: '#FF6584', accent: '#43CFFF', success: '#00D4AA', warning: '#FFB347', error: '#FF4757', bg: '#0A0A1A', card: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.10)', text: '#FFFFFF', muted: 'rgba(255,255,255,0.65)' } as const;

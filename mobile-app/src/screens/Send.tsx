@@ -1,0 +1,4 @@
+import React, { useState } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { FilePickerSheet } from '../components/FilePickerSheet';
+export default function Send(): JSX.Element { const [open, setOpen] = useState(false); return <ScrollView style={{ flex: 1, backgroundColor: '#0A0A1A' }} contentContainerStyle={{ padding: 20 }}><Text style={{ color: 'white', fontSize: 28, fontWeight: '700' }}>Send</Text><View style={{ marginTop: 20, borderRadius: 28, borderWidth: 1, borderColor: 'rgba(108,99,255,0.4)', padding: 30, alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 22 }}>Drop or choose files</Text><Pressable onPress={() => setOpen(true)} style={{ marginTop: 18, backgroundColor: '#6C63FF', paddingHorizontal: 20, paddingVertical: 14, borderRadius: 16 }}><Text style={{ color: 'white', fontWeight: '700' }}>Browse</Text></Pressable></View><FilePickerSheet visible={open} onClose={() => setOpen(false)} /></ScrollView>; }

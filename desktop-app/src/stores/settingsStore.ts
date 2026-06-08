@@ -1,0 +1,3 @@
+import { create } from 'zustand';
+interface SettingsState { modePreference: 'auto' | 'local' | 'webrtc'; localChunkSizeMB: number; parallelStreams: number; saveLocation: string; autoAccept: boolean; autoOpenFolder: boolean; bandwidthLimit: number; set<K extends keyof Omit<SettingsState, 'set'>>(key: K, value: SettingsState[K]): void; }
+export const useSettingsStore = create<SettingsState>((set) => ({ modePreference: 'auto', localChunkSizeMB: 10, parallelStreams: 8, saveLocation: '', autoAccept: false, autoOpenFolder: true, bandwidthLimit: 0, set: (key, value) => set({ [key]: value } as Pick<SettingsState, typeof key>) }));

@@ -1,0 +1,76 @@
+name: Build Windows Desktop
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'desktop-app/**'
+      - 'local-server/**'
+      - '.github/workflows/build-windows-desktop.yml'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: desktop-app/package.json
+
+      - name: Build local server executable
+        shell: pwsh
+        run: |
+          cd local-server
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements.txt
+          python -m pip install pyinstaller
+          python -m PyInstaller server.spec
+          if (-not (Test-Path dist/filebeam-server.exe)) { throw 'PyInstaller did not produce dist/filebeam-server.exe' }
+
+      - name: Install desktop dependencies
+        shell: pwsh
+        run: |
+          cd desktop-app
+          npm install --legacy-peer-deps
+
+      - name: Build renderer
+        shell: pwsh
+        run: |
+          cd desktop-app
+          npm run build:react
+          if (-not (Test-Path dist/web/index.html)) { throw 'Renderer build missing dist/web/index.html' }
+
+      - name: Build Electron main process
+        shell: pwsh
+        run: |
+          cd desktop-app
+          npm run build:electron:ts
+          if (-not (Test-Path dist/electron/main.js)) { throw 'Electron main build missing dist/electron/main.js' }
+
+      - name: Package app
+        shell: pwsh
+        run: |
+          cd desktop-app
+          npx electron-builder --win nsis portable --publish never
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: filebeam-windows-build
+          path: |
+            desktop-app/dist/release/*.exe
+            desktop-app/dist/release/*.zip
+            desktop-app/dist/release/*.yml

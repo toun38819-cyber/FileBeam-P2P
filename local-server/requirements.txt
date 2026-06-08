@@ -1,0 +1,15 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+httptools==0.6.1
+websockets==12.0
+python-multipart==0.0.6
+qrcode[pil]==7.4.2
+Pillow==10.1.0
+cryptography==41.0.7
+aiofiles==23.2.1
+zstandard==0.22.0
+netifaces2==0.0.17
+humanize==4.9.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+pyinstaller==6.2.0

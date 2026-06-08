@@ -1,0 +1,5 @@
+import React from 'react';
+import { Pressable, Text, View } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
+interface Props { value: string; roomId: string; shortCode: string; }
+export function QRDisplay({ value, roomId, shortCode }: Props): JSX.Element { return <View style={{ alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 24, padding: 20 }}><View style={{ padding: 18, backgroundColor: 'white', borderRadius: 24 }}><QRCode value={value} size={220} /></View><Text style={{ color: 'white', marginTop: 18, fontWeight: '700', fontSize: 18 }}>{roomId}</Text><Text style={{ color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>{shortCode}</Text><View style={{ flexDirection: 'row', gap: 12, marginTop: 16 }}><Pressable style={{ backgroundColor: 'rgba(255,255,255,0.08)', paddingHorizontal: 14, paddingVertical: 10, borderRadius: 16 }}><Text style={{ color: 'white' }}>Copy Code</Text></Pressable><Pressable style={{ backgroundColor: 'rgba(255,255,255,0.08)', paddingHorizontal: 14, paddingVertical: 10, borderRadius: 16 }}><Text style={{ color: 'white' }}>Share</Text></Pressable></View></View>; }

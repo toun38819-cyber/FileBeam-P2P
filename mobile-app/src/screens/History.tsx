@@ -1,0 +1,3 @@
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+export default function History(): JSX.Element { return <ScrollView style={{ flex: 1, backgroundColor: '#0A0A1A' }} contentContainerStyle={{ padding: 20, gap: 14 }}><Text style={{ color: 'white', fontSize: 28, fontWeight: '700' }}>History</Text><View style={{ borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.05)', padding: 20, minHeight: 300, justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 18 }}>No transfers yet</Text><Text style={{ color: 'rgba(255,255,255,0.65)', marginTop: 8 }}>Connect a device and send your first file.</Text></View></ScrollView>; }

@@ -1,0 +1,6 @@
+import React from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ProgressRing } from '../components/ProgressRing';
+import { TransferCard } from '../components/TransferCard';
+import { useTransferStore } from '../stores/transferStore';
+export default function Progress(): JSX.Element { const { active } = useTransferStore(); const progress = active ?? { transferId: 'idle', filename: 'No transfer', totalBytes: 1, transferredBytes: 0, speed: 0, progress: 0, direction: 'send' as const, status: 'idle' as const }; return <ScrollView style={{ flex: 1, backgroundColor: '#0A0A1A' }} contentContainerStyle={{ padding: 20, alignItems: 'center', gap: 20 }}><Text style={{ color: 'white', fontSize: 28, fontWeight: '700' }}>{progress.status === 'complete' ? 'Transfer Complete!' : 'Transfer Progress'}</Text><ProgressRing progress={progress.progress} /><TransferCard progress={progress} /><View style={{ width: '100%', height: 8, borderRadius: 99, backgroundColor: 'rgba(255,255,255,0.08)' }}><View style={{ width: `${progress.progress}%`, height: '100%', borderRadius: 99, backgroundColor: '#6C63FF' }} /></View><Pressable style={{ paddingHorizontal: 20, paddingVertical: 14, backgroundColor: 'rgba(255,71,87,0.2)', borderRadius: 16 }}><Text style={{ color: '#FF4757', fontWeight: '700' }}>Cancel</Text></Pressable></ScrollView>; }
