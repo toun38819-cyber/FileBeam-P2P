@@ -5,6 +5,10 @@
   "main": "dist/electron/main.js",
   "author": "FileBeam",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toun38819-cyber/FileBeam-P2P.git"
+  },
   "scripts": {
     "dev:renderer": "vite",
     "dev:electron:build": "tsc -p tsconfig.electron.json --watch",
@@ -12,10 +16,10 @@
     "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron:build\" \"npm:dev:electron\"",
     "build:react": "vite build",
     "build:electron:ts": "tsc -p tsconfig.electron.json",
-    "build:electron": "npm run build:electron:ts && electron-builder --win",
+    "build:electron": "npm run build:electron:ts && electron-builder --config electron-builder.config.js --win",
     "build:server": "python ../local-server/build_server.py",
     "build:all": "npm run build:server && npm run build:react && npm run build:electron",
-    "build:portable": "npm run build:electron:ts && electron-builder --win portable",
+    "build:portable": "npm run build:electron:ts && electron-builder --config electron-builder.config.js --win portable",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit"
   },
   "dependencies": {

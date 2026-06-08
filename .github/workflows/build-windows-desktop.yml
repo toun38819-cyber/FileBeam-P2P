@@ -65,7 +65,7 @@ jobs:
         shell: pwsh
         run: |
           cd desktop-app
-          npx electron-builder --win nsis portable --publish never
+          npx electron-builder --config electron-builder.config.js --win nsis portable --publish never
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v6
